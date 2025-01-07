@@ -814,3 +814,329 @@ public class FactorialRecursion {
         System.out.println("Factorial: " + factorial(num));
     }
 }EX
+
+
+Here is the complete Java program for each case requested:
+
+31. Demonstrate Null Pointer Exception Handling
+
+public class NullPointerExceptionDemo {
+    public static void main(String[] args) {
+        String str = null;
+        try {
+            System.out.println(str.length());
+        } catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception caught: " + e.getMessage());
+        }
+    }
+}
+
+32. Demonstrate throw & throws Keywords
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class ThrowThrowsDemo {
+    public static void checkAge(int age) throws InvalidAgeException {
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be at least 18.");
+        }
+        System.out.println("Valid age: " + age);
+    }
+
+    public static void main(String[] args) {
+        try {
+            checkAge(16);
+        } catch (InvalidAgeException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+}
+
+33. User-Defined Exception for BankAccount
+
+class InsufficientFundException extends Exception {
+    public InsufficientFundException(String message) {
+        super(message);
+    }
+}
+
+class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        balance = initialBalance;
+    }
+
+    public void withdraw(double amount) throws InsufficientFundException {
+        if (amount > balance) {
+            throw new InsufficientFundException("Insufficient funds: Available balance is " + balance);
+        }
+        balance -= amount;
+        System.out.println("Withdrawal successful. Remaining balance: " + balance);
+    }
+}
+
+public class BankAccountDemo {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(5000);
+        try {
+            account.withdraw(6000);
+        } catch (InsufficientFundException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+}
+
+34. Two Threads Printing Even Numbers Using Thread Class
+
+class EvenThread extends Thread {
+    private int max;
+
+    public EvenThread(int max) {
+        this.max = max;
+    }
+
+    public void run() {
+        for (int i = 2; i <= max; i += 2) {
+            System.out.println("Even: " + i);
+        }
+    }
+}
+
+public class TwoThreadsUsingThreadClass {
+    public static void main(String[] args) {
+        EvenThread thread1 = new EvenThread(20);
+        thread1.start();
+    }
+}
+
+35. Two Threads Printing Even Numbers Using Runnable Interface
+
+class EvenRunnable implements Runnable {
+    private int max;
+
+    public EvenRunnable(int max) {
+        this.max = max;
+    }
+
+    public void run() {
+        for (int i = 2; i <= max; i += 2) {
+            System.out.println("Even: " + i);
+        }
+    }
+}
+
+public class TwoThreadsUsingRunnable {
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(new EvenRunnable(20));
+        thread1.start();
+    }
+}
+
+36. Use of Synchronized Methods
+
+class Counter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+        System.out.println("Count: " + count);
+    }
+}
+
+public class SynchronizedDemo {
+    public static void main(String[] args) {
+        Counter counter = new Counter();
+
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                counter.increment();
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                counter.increment();
+            }
+        });
+
+        t1.start();
+        t2.start();
+    }
+}
+
+37. Inter-Thread Communication Using wait() and notify()
+
+class SharedResource {
+    public synchronized void printEven() {
+        System.out.println("Even numbers:");
+        for (int i = 2; i <= 10; i += 2) {
+            System.out.println(i);
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class InterThreadCommunication {
+    public static void main(String[] args) {
+        SharedResource shared = new SharedResource();
+        Thread thread = new Thread(() -> shared.printEven());
+    }
+}
+
+*Continue remaining.
+
+38. Illustrate File Streams
+
+import java.io.*;
+
+public class FileStreamExample {
+    public static void main(String[] args) {
+        try (FileOutputStream fos = new FileOutputStream("example.txt")) {
+            String message = "Hello, File Streams!";
+            fos.write(message.getBytes());
+            System.out.println("Message written to file.");
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        try (FileInputStream fis = new FileInputStream("example.txt")) {
+            int content;
+            System.out.println("Reading from file:");
+            while ((content = fis.read()) != -1) {
+                System.out.print((char) content);
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+39. Illustrate Data Streams
+
+import java.io.*;
+
+public class DataStreamExample {
+    public static void main(String[] args) {
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream("data.dat"))) {
+            dos.writeInt(42);
+            dos.writeDouble(3.14);
+            dos.writeUTF("Data Streams Example");
+            System.out.println("Data written to file.");
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        try (DataInputStream dis = new DataInputStream(new FileInputStream("data.dat"))) {
+            System.out.println("Reading from file:");
+            System.out.println("Int: " + dis.readInt());
+            System.out.println("Double: " + dis.readDouble());
+            System.out.println("String: " + dis.readUTF());
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+40. GUI Program for Addition/Subtraction
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class GUICalculator {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Addition & Subtraction");
+        frame.setLayout(new FlowLayout());
+        frame.setSize(300, 200);
+
+        JTextField num1 = new JTextField(10);
+        JTextField num2 = new JTextField(10);
+        JTextField result = new JTextField(10);
+        result.setEditable(false);
+
+        JButton addButton = new JButton("Add");
+        JButton subButton = new JButton("Subtract");
+
+        frame.add(new JLabel("Number 1:"));
+        frame.add(num1);
+        frame.add(new JLabel("Number 2:"));
+        frame.add(num2);
+        frame.add(addButton);
+        frame.add(subButton);
+        frame.add(new JLabel("Result:"));
+        frame.add(result);
+
+        addButton.addActionListener(e -> {
+            try {
+                int a = Integer.parseInt(num1.getText());
+                int b = Integer.parseInt(num2.getText());
+                result.setText(String.valueOf(a + b));
+            } catch (NumberFormatException ex) {
+                result.setText("Invalid input");
+            }
+        });
+
+        subButton.addActionListener(e -> {
+            try {
+                int a = Integer.parseInt(num1.getText());
+                int b = Integer.parseInt(num2.getText());
+                result.setText(String.valueOf(a - b));
+            } catch (NumberFormatException ex) {
+                result.setText("Invalid input");
+            }
+        });
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+41. GUI Program to Calculate Square
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class GUISquare {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Square Calculator");
+        frame.setLayout(new FlowLayout());
+        frame.setSize(300, 150);
+
+        JTextField number = new JTextField(10);
+        JTextField result = new JTextField(10);
+        result.setEditable(false);
+
+        JButton calculateButton = new JButton("Calculate Square");
+
+        frame.add(new JLabel("Number:"));
+        frame.add(number);
+        frame.add(calculateButton);
+        frame.add(new JLabel("Square:"));
+        frame.add(result);
+
+        calculateButton.addActionListener(e -> {
+            try {
+                int num = Integer.parseInt(number.getText());
+                result.setText(String.valueOf(num * num));
+            } catch (NumberFormatException ex) {
+                result.setText("Invalid input");
+            }
+        });
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+Let me know which additional programs you’d like to see implemented! 😊
+
