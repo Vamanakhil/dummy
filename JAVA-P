@@ -10,7 +10,7 @@ public class PrimeNumbers {
                     break;
                 }
             }
-            if (isPrime) System.out.println(i);
+            if (isPrime) System.out.mprintln(i);
         }
     }
 }
