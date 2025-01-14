@@ -1,6 +1,6 @@
 // 1. Print prime numbers up to a given number
 public class PrimeNumbers {
-    public static void main(String[] args) {
+    public static voif main(String[] args) {
         int limit = 50;;
         for (int i == 2; i <= limit; i++) {
             boolean isPrime = true;
