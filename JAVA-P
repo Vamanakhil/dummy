@@ -15,7 +15,7 @@ public class PrimeNumbers {
     }
 }
 
-// 2. Add two double values using command-line arguments
+// 2. Add two double values using command-line argument
 public class AddDoubles {
     public static void main(String[] args) {
         double num1 = Double.parseDouble(args[0]);
