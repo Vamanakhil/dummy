@@ -1,4 +1,4 @@
-// 1. Print prime numbers up to a given number\
+// 1. Print prime numbers up to a given number
 public class PrimeNumbers {
     public static voif main(String[] args) {
         int limit = 50;;
